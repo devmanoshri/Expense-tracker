@@ -1,0 +1,54 @@
+<h2>Expense Tracker</h2>
+
+<form (ngSubmit)="editTransactionId ? updateTransaction() : addTransaction()">
+
+    <input type="text" placeholder="Title" [(ngModel)]="newTransaction.title" name="title" required />
+    <input type="number" placeholder="Amount" [(ngModel)]="newTransaction.amount" name="amount" required />
+    <!-- <input type="text" placeholder="Category" [(ngModel)]="newTransaction.categoryId" name="category" required /> -->
+    <select [(ngModel)]="newTransaction.categoryId" name="categoryId" required>
+        <option value="0">Select Category</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+        </option>
+    </select>
+
+    <input type="date" [(ngModel)]="newTransaction.date" name="date" required />
+
+    <button type="submit">
+        {{ editTransactionId ? 'Update Transaction' : 'Add Transaction' }}
+    </button>
+    <button *ngIf="editTransactionId" type="button" (click)="cancelEdit()">
+        Cancel
+    </button>
+</form>
+
+<hr />
+
+<div class="select-category">
+    <h3>Total Expense: {{ getTotalTransaction() }}Kr.</h3>
+     <label for="category">Filter by Category</label> 
+    <!-- <h3>Filter by Category</h3> -->
+    <select [(ngModel)]="selectedCategoryId">
+        <option [ngValue]="null">All Categories</option>
+        <option *ngFor="let category of categories" [ngValue]="category.id">
+            {{ category.name }}
+        </option>
+    </select>
+</div>
+
+<ul>
+    @for (transaction of getFilteredTransactions(); track $index) {
+    <li>
+        {{ transaction.title }} - {{ transaction.amount }}Kr. - {{getCategoryName(transaction.categoryId!)}}
+         <button (click)="editTransaction(transaction)">InlineEdit</button> 
+
+        <button [routerLink]="['/transactions/edit', transaction.id]">Edit</button>
+
+        <button (click)="deleteTransaction(transaction.id!)">Delete</button>
+    </li>
+    }
+</ul>
+
+<hr />
+
+<!-- <app-expense-chart [expenses]="getFilteredTransactions()" /> -->

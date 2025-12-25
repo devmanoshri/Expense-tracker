@@ -11,7 +11,7 @@ import { Category } from '../models/category.model';
 
 
 export class CategoriesService {
-  private apiUrl = `${environment.apiUrl}/categories`;
+  private apiUrl = `${environment.apiUrl}/expenseCategories`;
   private categories: Category[] = [];
 
   constructor(private http: HttpClient) {}
@@ -26,7 +26,7 @@ export class CategoriesService {
     });
   }
 
-  getCategoryName(catId: number): string {
+  getCategoryName(catId: string): string {
     const category = this.categories.find(category => category.id === catId);
     return category ? category.name : 'Unknown';
   }

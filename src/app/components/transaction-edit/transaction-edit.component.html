@@ -1,0 +1,11 @@
+<h2>Edit Expense</h2>
+
+<form *ngIf="transaction" (ngSubmit)="updateTransaction()">
+
+  <input type="text" [(ngModel)]="transaction.title" name="title" required />
+  <input type="number" [(ngModel)]="transaction.amount" name="amount" required />
+  <input type="number" [(ngModel)]="transaction.categoryId" name="category" required />
+  <input type="date" [(ngModel)]="transaction.date" name="date" required />
+
+  <button type="submit">Update</button>
+</form>

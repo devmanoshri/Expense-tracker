@@ -18,5 +18,5 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.categoriesService.loadCategories();
   }
-  title = 'expense-tracker';
+  title = '♡ expense-tracker';
 }

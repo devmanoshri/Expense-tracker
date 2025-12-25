@@ -1,11 +1,11 @@
 {
-  "expenses": [
+  "transactions": [
     {
       "id": "1",
       "title": "Groceries",
-      "amount": 1700,
+      "amount": 1800,
       "type": "expense",
-      "categoryId": "1",
+      "categoryId": "2",
       "date": "2025-01-10"
     },
     {
@@ -23,10 +23,9 @@
       "type": "expense",
       "categoryId": "5",
       "date": "2025-01-10"
-      
     },
     {
-      "id": "9992",
+      "id": "4",
       "title": "Story Books",
       "amount": 900,
       "type": "expense",
@@ -34,7 +33,7 @@
       "date": "2025-12-18"
     },
     {
-      "id": "fca4",
+      "id": "5",
       "title": "sosage",
       "amount": 60,
       "type": "expense",
@@ -42,31 +41,47 @@
       "date": "2025-12-23"
     },
     {
-      "id": "94d7",
-      "title": "Wood ",
-      "amount": 600,
-      "type": "expense",
-      "categoryId": "2",
-      "date": "2025-12-25"
-    },
-    {
-      "id": "10e1",
+      "id": "6",
       "title": "Cloth",
       "amount": 1200,
       "type": "expense",
-      "categoryId": "4",
+      "categoryId": "5",
       "date": ""
     },
     {
-      "id": "111",
+      "id": "7",
       "title": "Salary",
       "amount": 50000,
       "type": "income",
       "categoryId": 0,
       "date": "2025-01-01"
+    },
+    {
+      "id": "8",
+      "title": "Gift",
+      "amount": 300,
+      "categoryId": "6",
+      "date": "2025-12-03",
+      "type": "income"
+    },
+    {
+      "id": "09bb",
+      "title": "new items",
+      "amount": 600,
+      "categoryId": "4",
+      "date": "2025-12-25",
+      "type": "income"
+    },
+    {
+      "id": "7372",
+      "title": "extra",
+      "amount": 400,
+      "categoryId": "1",
+      "date": "2025-12-24",
+      "type": "income"
     }
   ],
-  "categories": [
+  "expenseCategories": [
     {
       "id": "1",
       "name": "Food"
