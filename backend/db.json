@@ -2,7 +2,7 @@
   "transactions": [
     {
       "id": "1",
-      "title": "Groceries for month",
+      "title": "Groceries dec",
       "amount": 2100,
       "type": "expense",
       "categoryId": "2",
@@ -18,7 +18,7 @@
     },
     {
       "id": "3",
-      "title": "Ruter",
+      "title": "Ruter bilett",
       "amount": 780,
       "type": "expense",
       "categoryId": "5",
@@ -49,14 +49,6 @@
       "date": ""
     },
     {
-      "id": "7",
-      "title": "Salary",
-      "amount": 50000,
-      "type": "income",
-      "categoryId": 0,
-      "date": "2025-01-01"
-    },
-    {
       "id": "8",
       "title": "Gift",
       "amount": 300,
@@ -82,7 +74,7 @@
     },
     {
       "id": "d2d0",
-      "title": "gift card amount",
+      "title": "gift card ",
       "amount": 300,
       "type": "income",
       "date": "2025-12-25"

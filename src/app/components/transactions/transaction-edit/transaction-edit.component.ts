@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Transaction } from '../../../models/transaction.model';
+import { Category } from '../../../models/category.model';
+import { TransactionService } from '../../../services/transaction.service';
+import { CategoriesService } from '../../../services/categories.service';
 
-import { TransactionService } from '../../services/transaction.service';
-import { CategoriesService } from '../../services/categories.service';
-
-import { Transaction } from '../../models/transaction.model';
-import { Category } from '../../models/category.model';
 
 @Component({
   selector: 'app-transaction-edit',
@@ -45,13 +44,17 @@ export class TransactionEditComponent implements OnInit {
       .subscribe(data => this.categories = data);
   }
 
+
   updateTransaction(): void {
-    this.transactionService
-      .updateTransaction(this.transaction)
-      .subscribe(() => this.router.navigate(['/transactions']));
-  }
+  this.transactionService.updateTransaction(this.transaction)
+    .subscribe(() => {
+      alert('Transaction updated successfully!');
+      this.router.navigate(['/']);
+    });
+}
+
 
   cancel(): void {
-    this.router.navigate(['/transactions']);
+    this.router.navigate(['/']);
   }
 }
