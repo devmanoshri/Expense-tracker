@@ -20,7 +20,7 @@ export class CategoriesService {
     return this.http.get<Category[]>(this.apiUrl);
   }
 
-  loadCategories(): void {
+  loadCategories() {
     this.getCategories().subscribe(categories => {
       this.categories = categories;
     });

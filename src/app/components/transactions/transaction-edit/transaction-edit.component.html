@@ -1,8 +1,8 @@
 <div class="edit-container">
-<h2>Edit Transaction</h2>
+  <h2>Edit Transaction</h2>
 
-<form *ngIf="transaction" (ngSubmit)="updateTransaction()">
-  <div class="radio-group">
+  <form *ngIf="transaction" (ngSubmit)="updateTransaction()">
+    <div class="radio-group">
       <label>
         <input type="radio" value="income" [(ngModel)]="transaction.type" name="type">
         Income
@@ -14,26 +14,27 @@
       </label>
     </div>
 
-  <input type="text" [(ngModel)]="transaction.title" name="title" placeholder="Title" required>
+    <input type="text" [(ngModel)]="transaction.title" name="title" placeholder="Title" required>
 
 
-  <input type="number" [(ngModel)]="transaction.amount" name="amount" placeholder="Amount" required>
+    <input type="number" [(ngModel)]="transaction.amount" name="amount" placeholder="Amount" required>
 
 
-  <select *ngIf="transaction.type === 'expense'" [(ngModel)]="transaction.categoryId" name="categoryId" required>
-    <option [ngValue]="null">Select Category</option>
-    <option *ngFor="let category of categories" [ngValue]="category.id.toString()">
-      {{ category.name }}
-    </option>
-  </select>
+    <select *ngIf="transaction.type === 'expense'" [(ngModel)]="transaction.categoryId" name="categoryId" required>
+      <option [ngValue]="null">Select Category</option>
+      <option *ngFor="let category of categories" [ngValue]="category.id.toString()">
+        {{ category.name }}
+      </option>
+    </select>
 
 
-  <input type="date" [(ngModel)]="transaction.date" name="date" required>
+    <input type="date" [(ngModel)]="transaction.date" name="date" required>
 
-  <button type="submit" [disabled]="!transaction.title || !transaction.amount || (transaction.type==='expense' && !transaction.categoryId)">
-  Update
-</button>
+    <button type="submit"
+      [disabled]="!transaction.title || !transaction.amount || (transaction.type==='expense' && !transaction.categoryId)">
+      Update
+    </button>
 
-  <button type="button" (click)="cancel()">Cancel</button>
-</form>
+    <button type="button" (click)="cancel()">Cancel</button>
+  </form>
 </div>

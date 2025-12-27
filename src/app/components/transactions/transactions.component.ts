@@ -24,7 +24,7 @@ import { TransactionChartComponent } from "./transaction-chart/transaction-chart
     TransactionFilterComponent,
     TransactionSummaryComponent,
     TransactionChartComponent
-],
+  ],
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss']
 })
@@ -42,7 +42,7 @@ export class TransactionsComponent implements OnInit {
   constructor(
     private transactionService: TransactionService,
     private categoryService: CategoriesService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadTransactions();
@@ -91,6 +91,8 @@ export class TransactionsComponent implements OnInit {
   }
 
   delete(id: string) {
+    const confirmDelete = confirm('Are you sure you want to delete this transaction?');
+    if (!confirmDelete) return;
     this.transactionService.deleteTransaction(id)
       .subscribe(() => this.loadTransactions());
   }

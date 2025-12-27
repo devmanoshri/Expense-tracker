@@ -1,0 +1,9 @@
+.app-layout {
+  padding: 2rem;
+  background: var(--color-white);
+  min-height: 100vh;
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+}

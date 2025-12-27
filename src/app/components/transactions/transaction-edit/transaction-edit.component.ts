@@ -25,7 +25,7 @@ export class TransactionEditComponent implements OnInit {
     private router: Router,
     private transactionService: TransactionService,
     private categoryService: CategoriesService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -46,12 +46,12 @@ export class TransactionEditComponent implements OnInit {
 
 
   updateTransaction(): void {
-  this.transactionService.updateTransaction(this.transaction)
-    .subscribe(() => {
-      alert('Transaction updated successfully!');
-      this.router.navigate(['/']);
-    });
-}
+    this.transactionService.updateTransaction(this.transaction)
+      .subscribe(() => {
+        alert('Transaction updated successfully!');
+        this.router.navigate(['/']);
+      });
+  }
 
 
   cancel(): void {

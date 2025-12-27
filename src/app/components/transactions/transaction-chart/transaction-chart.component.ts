@@ -5,11 +5,13 @@ import {
   SimpleChanges,
   AfterViewInit,
   ViewChild,
-  ElementRef
+  ElementRef,
+  OnInit
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Chart, ChartConfiguration } from 'chart.js/auto';
 import { Transaction } from '../../../models/transaction.model';
+import { TransactionService } from '../../../services/transaction.service';
 
 @Component({
   selector: 'app-transaction-chart',
@@ -18,10 +20,22 @@ import { Transaction } from '../../../models/transaction.model';
   templateUrl: './transaction-chart.component.html',
   styleUrls: ['./transaction-chart.component.scss']
 })
-export class TransactionChartComponent
-  implements AfterViewInit, OnChanges {
 
-  @Input() transactions: Transaction[] = [];
+export class TransactionChartComponent
+  implements AfterViewInit, OnChanges, OnInit {
+
+  constructor(private txService: TransactionService){}
+  transactions: Transaction[]  = [];
+
+  ngOnInit(): void {
+    this.txService.getTransactions()
+    .subscribe(t => {
+      this.transactions = t;
+      this.renderChart();
+    });
+  }
+
+ // @Input() transactions: Transaction[] = [];
 
   @ViewChild('chartCanvas')
   canvas!: ElementRef<HTMLCanvasElement>;
