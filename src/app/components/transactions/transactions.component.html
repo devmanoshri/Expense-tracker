@@ -1,8 +1,13 @@
 <h2>Transaction Tracker</h2>
 
+<h3 style="color: green;">Income: ${{ totalIncome }}</h3>
+<h3 style="color: red;">Expense: ${{ totalExpense }}</h3>
+<h3>Balance: ${{ balance }}</h3>
+
+<hr>
+
 <form (ngSubmit)="editTransactionId ? updateTransaction() : addTransaction()">
 
-  <!-- TYPE -->
   <label>
     <input type="radio" value="income" [(ngModel)]="newTransaction.type" name="type">
     Income
@@ -13,7 +18,6 @@
     Expense
   </label>
 
-  <!-- TITLE -->
   <input
     type="text"
     placeholder="Title"
@@ -22,7 +26,6 @@
     required
   >
 
-  <!-- AMOUNT -->
   <input
     type="number"
     placeholder="Amount"
@@ -31,7 +34,6 @@
     required
   >
 
-  <!-- CATEGORY (ONLY FOR EXPENSE) -->
   <select
     *ngIf="newTransaction.type === 'expense'"
     [(ngModel)]="newTransaction.categoryId"
@@ -44,7 +46,6 @@
     </option>
   </select>
 
-  <!-- DATE -->
   <input
     type="date"
     [(ngModel)]="newTransaction.date"
@@ -67,13 +68,6 @@
 
 <hr>
 
-<!-- SUMMARY -->
-<h3 style="color: green;">Income: ₹{{ totalIncome }}</h3>
-<h3 style="color: red;">Expense: ₹{{ totalExpense }}</h3>
-<h3>Balance: ₹{{ balance }}</h3>
-
-<hr>
-
 <!-- FILTERS -->
 <label>Filter by Category:</label>
 <select [(ngModel)]="selectedCategoryId">
@@ -89,37 +83,36 @@
 <label>To:</label>
 <input type="date" [(ngModel)]="toDate">
 
-<hr>
+
 
 <!-- LIST -->
-
 <ul>
   @for (transaction of filteredTransactions; track transaction.id) {
     <li>
 
-      <!-- TITLE + AMOUNT -->
+    
       <span
         [style.color]="transaction.type === 'income' ? 'green' : 'red'">
-        {{ transaction.title }} – ₹{{ transaction.amount }}
+        {{ transaction.title }} – ${{ transaction.amount }}
       </span>
 
-      <!-- CATEGORY (ONLY EXPENSE) -->
+
       <span *ngIf="transaction.type === 'expense'">
         ({{ getCategoryName(transaction.categoryId) }})
       </span>
 
-      <!-- INLINE EDIT -->
+
       <button (click)="editTransaction(transaction)">
         Inline Edit
       </button>
 
-      <!-- ✅ EDIT PAGE BUTTON (NEW) -->
+
       <button
         [routerLink]="['/transactions/edit', transaction.id]">
         Edit
       </button>
 
-      <!-- DELETE -->
+    
       <button (click)="deleteTransaction(transaction.id!)">
         Delete
       </button>
@@ -129,6 +122,6 @@
 </ul>
 
 
-<app-expense-chart
+<app-transaction-chart
   [transactions]="filteredTransactions">
-</app-expense-chart>
+</app-transaction-chart>

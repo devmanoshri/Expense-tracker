@@ -8,12 +8,12 @@ import { CategoriesService } from '../../services/categories.service';
 
 import { Transaction } from '../../models/transaction.model';
 import { Category } from '../../models/category.model';
-import { ExpenseChartComponent } from "../expense-chart/expense-chart.component";
+import { TransactionChartComponent } from "../transaction-chart/transaction-chart.component";
 
 @Component({
   selector: 'app-transactions',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink, ExpenseChartComponent],
+  imports: [FormsModule, CommonModule, RouterLink, TransactionChartComponent],
   templateUrl: './transactions.component.html'
 })
 export class TransactionsComponent implements OnInit {
@@ -38,7 +38,7 @@ export class TransactionsComponent implements OnInit {
   constructor(
     private transactionService: TransactionService,
     private categoryService: CategoriesService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadTransactions();
