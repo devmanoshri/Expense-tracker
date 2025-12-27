@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+
+
+:root {
+    --color-primary: #4f46e5;
+    --color-secondary: #22c55e;
+    --color-accent: #f59e0b;
+    --color-danger: #ef4444;
+
+    --color-bg: #f5f7fa;
+    --color-text: #1f2937;
+    --color-muted: #6b7280;
+
+    --color-brunt-rose: #8D4C50;
+    --color-lemon: #D1D646;
+    --color-vanilla : #DFE49B;
+
+    --block-spacing: 30px;
+    --container-border-radius: 12px;
+
+
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 28px;
+}
