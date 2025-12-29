@@ -1,8 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Transaction } from '../../../models/transaction.model';
+import { Observable } from 'rxjs';
 import { Category } from '../../../models/category.model';
+import { Transaction } from '../../../models/transaction.model';
+import { CategoryStoreService } from '../../../services/category-store.service';
+import { TransactionStoreService } from '../../../services/transaction-store.service';
+import { TransactionService } from '../../../services/transaction.service';
 
 
 @Component({
@@ -12,15 +16,33 @@ import { Category } from '../../../models/category.model';
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss']
 })
-export class TransactionListComponent {
 
-  @Input() transactions: Transaction[] = [];
-  @Input() categories: Category[] = [];
+export class TransactionListComponent implements OnInit {
 
-  @Output() edit = new EventEmitter<Transaction>();
-  @Output() delete = new EventEmitter<string>();
+  transactions$!: Observable<Transaction[]>;
+  categories$!: Observable<Category[]>;
+
+  private categoryStoreServices = inject(CategoryStoreService);
+  private transactionStoreServices = inject(TransactionStoreService);
+  private transactionService = inject(TransactionService);
+
+  ngOnInit(): void {
+    this.categoryStoreServices.initCategory();
+    this.transactionStoreServices.initTransaction();
+
+    this.transactions$ = this.transactionStoreServices.transactions$;
+    this.categories$ = this.categoryStoreServices.categories$;
+  }
 
   getCategoryName(id?: string): string {
-    return this.categories.find(c => c.id === id)?.name || '';
+    return this.categoryStoreServices.getCategoryNameById(id);
+  }
+
+  onDelete(selectedTransactionId: string): void {
+    const confirmDelete = confirm('Are you sure you want to delete this transaction?');
+    if (!confirmDelete) return;
+
+    this.transactionService.deleteTransaction(selectedTransactionId)
+      .subscribe(() => this.transactionStoreServices.initTransaction(true));
   }
 }

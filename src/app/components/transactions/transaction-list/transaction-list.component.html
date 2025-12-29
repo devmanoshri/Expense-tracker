@@ -2,25 +2,26 @@
   <h2>Transaction List</h2>
 
   <ul class="transaction-list">
-    <li *ngFor="let t of transactions" [class.income]="t.type === 'income'" [class.expense]="t.type === 'expense'">
+    <li *ngFor="let transaction of transactions$ |async" [class.income]="transaction.type === 'income'"
+      [class.expense]="transaction.type === 'expense'">
 
       <div class="info">
-        <div class="item-name bold-text">{{ t.title }}</div>
+        <div class="item-name bold-text">{{ transaction.title }}</div>
         <div>
-          <span> ${{ t.amount }}</span>
-          <small class="category-name-expense" *ngIf="t.type === 'expense'">
-            {{ getCategoryName(t.categoryId) }}
+          <span> ${{ transaction.amount }}</span>
+          <small class="category-name-expense" *ngIf="transaction.type === 'expense'">
+            {{ getCategoryName(transaction.categoryId) }}
           </small>
-          <small class="category-name-income" *ngIf="t.type === 'income'">
+          <small class="category-name-income" *ngIf="transaction.type === 'income'">
             Income
           </small>
         </div>
       </div>
 
       <div class="actions">
-        <button (click)="edit.emit(t)" class="edit-btn">Inline Edit</button>
-        <button [routerLink]="['/transactions/edit', t.id]" class="edit-btn">Edit</button>
-        <button (click)="delete.emit(t.id!)" type="button">Delete</button>
+        <!-- <button (click)="edit.emit(transaction)" class="edit-btn">Inline Edit</button> -->
+        <button [routerLink]="['/transactions/edit', transaction.id]" class="edit-btn">Edit</button>
+        <button (click)="onDelete(transaction.id!)" type="button">Delete</button>
       </div>
 
     </li>
