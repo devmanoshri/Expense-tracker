@@ -2,8 +2,8 @@
   "transactions": [
     {
       "id": "1",
-      "title": "Groceries dec",
-      "amount": 2100,
+      "title": "Groceries december",
+      "amount": 3200,
       "type": "expense",
       "categoryId": "2",
       "date": "2025-01-10"
@@ -34,76 +34,82 @@
     },
     {
       "id": "5",
-      "title": "Sosage",
-      "amount": 60,
+      "title": "Sosages packs",
+      "amount": 600,
       "type": "expense",
-      "categoryId": "1",
-      "date": "2025-02-23"
-    },
-    {
-      "id": "6",
-      "title": "Cloth",
-      "amount": 1200,
-      "type": "expense",
-      "categoryId": "5",
-      "date": ""
-    },
-    {
-      "id": "8",
-      "title": "Gift",
-      "amount": 300,
-      "categoryId": "6",
-      "date": "2025-12-03",
-      "type": "income"
+      "categoryId": "2",
+      "date": "2025-02-22"
     },
     {
       "id": "7372",
       "title": "extra",
       "amount": 400,
-      "categoryId": "1",
+      "categoryId": "2",
       "date": "2025-12-24",
       "type": "income"
     },
     {
-      "id": "e844",
-      "title": "cake",
-      "amount": 299,
-      "type": "expense",
-      "categoryId": "1",
-      "date": "2025-12-25"
+      "id": "be7a",
+      "title": "salary amount",
+      "amount": 30000,
+      "type": "income",
+      "date": "2025-12-01",
+      "categoryId": ""
     },
     {
-      "id": "d2d0",
-      "title": "gift card ",
+      "id": "4cf8",
+      "title": "cosmetics",
       "amount": 300,
-      "type": "income",
+      "type": "expense",
+      "categoryId": "2",
       "date": "2025-12-25"
     }
   ],
-  "expenseCategories": [
+  "transactionCategories": [
     {
       "id": "1",
-      "name": "Food"
+      "name": "Food",
+      "type": "expense"
     },
     {
       "id": "2",
-      "name": "Utilities"
+      "name": "Utilities",
+      "type": "expense"
     },
     {
       "id": "3",
-      "name": "Transport"
+      "name": "Transport",
+      "type": "expense"
     },
     {
       "id": "4",
-      "name": "Shopping"
+      "name": "Shopping",
+      "type": "expense"
     },
     {
       "id": "5",
-      "name": "Monthly"
+      "name": "Monthly",
+      "type": "expense"
     },
     {
       "id": "6",
-      "name": "Mics"
+      "name": "Mics",
+      "type": "expense"
+    },
+    {
+      "id": "7",
+      "name": "Salary",
+      "type": "income"
+    },
+    {
+      "id": "8",
+      "name": "Gift",
+      "type": "income"
+    },
+    {
+      "id": "7",
+      "name": "Others",
+      "type": "income"
     }
   ]
 }
