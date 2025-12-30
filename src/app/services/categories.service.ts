@@ -11,7 +11,7 @@ import { Category } from '../models/category.model';
 
 
 export class CategoriesService {
-  private apiUrl = `${environment.apiUrl}/expenseCategories`;
+  private apiUrl = `${environment.apiUrl}/transactionCategories`;
   private categories: Category[] = [];
 
   constructor(private http: HttpClient) {}
@@ -26,8 +26,8 @@ export class CategoriesService {
     });
   }
 
-  getCategoryName(catId: string): string {
-    const category = this.categories.find(category => category.id === catId);
-    return category ? category.name : 'Unknown';
-  }
+  // getCategoryName(catId: string): string {
+  //   const category = this.categories.find(category => category.id === catId);
+  //   return category ? category.name : 'Unknown';
+  // }
 }

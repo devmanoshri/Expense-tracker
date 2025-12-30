@@ -39,6 +39,5 @@ export class CategoryStoreService {
     if (!id) return '';
     return this._categories$.getValue().find(category => category.id === id)?.name || '';
   }
-
-
+  
 }
