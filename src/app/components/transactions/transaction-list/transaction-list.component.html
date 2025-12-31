@@ -1,18 +1,24 @@
 <div class="transaction-list-contaier">
   <div class="list-header">
-    <h2>Transaction List</h2>
+    <h2>{{sortTitle}}</h2>
+    @if(showSorting){
     <div class="list-sort-wrapper">
       <label for="list-sort">Sort</label>
-      <select name="list-sort" id="list-sort" (change)="onSelectSorting($event)">
-        <option value="desc">Newest</option>
-        <option value="asc">Oldest</option>
+      <select name="list-sort" id="list-sort" [formControl]="sortSelect">
+        <option [ngValue]="null">Select</option>
+        @for (item of selectSortObject; track $index) {
+        <option [ngValue]="item.value">{{ item.label }}</option>
+        }
       </select>
     </div>
+    }
   </div>
-
   <ul class="transaction-list">
     <li
-      *ngFor="let transaction of sortedTransactions"
+      *ngFor="
+        let transaction of transactions ?? []
+          | sortTransaction : sortBy?.orderBy : sortBy?.sortOrder
+      "
       [class.income]="transaction.type === 'income'"
       [class.expense]="transaction.type === 'expense'"
     >

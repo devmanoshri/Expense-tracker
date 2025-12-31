@@ -7,45 +7,76 @@ import {
   SimpleChanges,
   inject,
 } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category } from '../../../models/category.model';
 import { Transaction } from '../../../models/transaction.model';
+import { SortTransactionPipe } from '../../../pipes/sort-transaction.pipe';
 import { CategoryStoreService } from '../../../services/category-store.service';
 import { TransactionStoreService } from '../../../services/transaction-store.service';
 import { TransactionService } from '../../../services/transaction.service';
 
+interface SelectSort {
+  label: string;
+  value: SortBy;
+}
+interface SortBy {
+  orderBy: keyof Transaction;
+  sortOrder: 'asc' | 'desc';
+}
+
 @Component({
   selector: 'app-transaction-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, SortTransactionPipe, ReactiveFormsModule],
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss'],
 })
-export class TransactionListComponent implements OnInit, OnChanges {
-  //transactions$!: Observable<Transaction[]>;
-  categories$!: Observable<Category[]>;
+
+export class TransactionListComponent implements OnInit {
   @Input() transactions: Transaction[] | undefined;
-  sortOrder: 'asc' | 'desc' = 'desc';
-  sortedTransactions: Transaction[] = [];
+  @Input() showSorting = true;
+  sortTitle: string = '';
+
+  sortBy: SortBy | null = null;
+  categories$!: Observable<Category[]>;
+
+  sortSelect: FormControl<SortBy | null>;
+  selectSortObject: SelectSort[] = [
+    {
+      label: 'Newest',
+      value: { orderBy: 'date', sortOrder: 'desc' },
+    },
+    {
+      label: 'Oldest',
+      value: { orderBy: 'date', sortOrder: 'asc' },
+    },
+    {
+      label: 'Amount (high to low)',
+      value: { orderBy: 'amount', sortOrder: 'desc' },
+    },
+    {
+      label: 'Amount (low to high)',
+      value: { orderBy: 'amount', sortOrder: 'asc' },
+    },
+  ];
 
   private categoryStoreServices = inject(CategoryStoreService);
   private transactionStoreServices = inject(TransactionStoreService);
   private transactionService = inject(TransactionService);
 
-  ngOnInit(): void {
-    this.categoryStoreServices.initCategory();
-    // this.transactionStoreServices.initTransaction();
-
-    //this.transactions$ = this.transactionStoreServices.transactions$;
-    this.categories$ = this.categoryStoreServices.categories$;
-    this.applySorting();
+  constructor() {
+    this.sortSelect = new FormControl(null);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['transactions']) {
-      this.applySorting();
-    }
+  ngOnInit(): void {
+    this.sortTitle = this.showSorting
+      ? 'Transaction List'
+      : 'Latest Transactions';
+    this.categoryStoreServices.initCategory();
+    this.sortSelect.valueChanges.subscribe((value) => (this.sortBy = value));
+    this.categories$ = this.categoryStoreServices.categories$;
   }
 
   getCategoryName(id?: string): string {
@@ -54,7 +85,7 @@ export class TransactionListComponent implements OnInit, OnChanges {
 
   onDelete(selectedTransactionId: string): void {
     const confirmDelete = confirm(
-      'Are you sure you want to delete this transaction?'
+      'Are you sure you want to delete this transaction?',
     );
     if (!confirmDelete) return;
 
@@ -63,19 +94,4 @@ export class TransactionListComponent implements OnInit, OnChanges {
       .subscribe(() => this.transactionStoreServices.initTransaction(true));
   }
 
-  onSelectSorting(event: Event) {
-    this.sortOrder = (event.target as HTMLSelectElement).value as
-      | 'asc'
-      | 'desc';
-    this.applySorting();
-  }
-
-  applySorting() {
-    if (!this.transactions) return;
-    this.sortedTransactions = [...this.transactions].sort((a, b) =>
-      this.sortOrder === 'desc'
-        ? new Date(b.date).getTime() - new Date(a.date).getTime()
-        : new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
-  }
 }
