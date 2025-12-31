@@ -27,17 +27,17 @@ export class CategoryStoreService {
     ).subscribe((categoryData) => this._categories$.next(categoryData));
   }
 
+  getCategoryNameById(id?: string): string {
+    if (!id) return '';
+    return this._categories$.getValue().find(category => category.id === id)?.name || '';
+  }
+
   get categories$(): Observable<Category[]> {
     return this._categories$.asObservable();
   }
 
   get categoryHasError$(): Observable<boolean> {
     return this._categoryHasError$.asObservable();
-  }
-
-  getCategoryNameById(id?: string): string {
-    if (!id) return '';
-    return this._categories$.getValue().find(category => category.id === id)?.name || '';
   }
   
 }
