@@ -1,0 +1,6 @@
+<div class="chart-wrapper">
+     <app-transaction-summary
+      [selectedTransactions]="transactionsChangeFromChart"
+    ></app-transaction-summary> 
+<app-transaction-chart (transactionsChange)="onTransactionsChange($event)"></app-transaction-chart>
+</div>
