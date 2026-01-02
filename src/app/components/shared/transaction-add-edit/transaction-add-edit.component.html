@@ -1,0 +1,67 @@
+<div class="edit-container">
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+    <div class="radio-group">
+      <label>Transaction type</label>
+      <div class="inline-form-group">
+        <input type="radio" value="income" formControlName="transactionType" />
+        <label> Income </label>
+      </div>
+      <div class="inline-form-group">
+        <input type="radio" value="expense" formControlName="transactionType" />
+        <label> Expense </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="trTitle">Title</label>
+      <input
+        type="text"
+        id="trTitle"
+        formControlName="title"
+        placeholder="Title"
+      />
+    </div>
+    <div class="form-group">
+      <label for="trAmount">Amount</label>
+      <input
+        type="number"
+        id="trAmount"
+        formControlName="amount"
+        placeholder="Amount"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="trCategoryId">Category</label>
+      <select id="trCategoryId" formControlName="categoryId">
+        <option value="">Select</option>
+        <option
+          *ngFor="
+            let category of categories$
+              | async
+              | filterCategory
+                : transactionForm.get('transactionType')?.value ?? 'income'
+          "
+          [value]="category.id"
+        >
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="trTransactionDate">Transaction date</label>
+      <input
+        type="date"
+        id="trTransactionDate"
+        formControlName="transactionDate"
+      />
+    </div>
+    <button type="submit" class="primary" [disabled]="transactionForm.invalid">
+      {{ isEdit ? "Update" : "Add" }}
+    </button>
+    <button type="button" class="secondary" (click)="abort.emit()">
+      Cancel
+    </button>
+  </form>
+</div>
