@@ -1,4 +1,4 @@
-import { CommonModule, SlicePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from '../../../models/category.model';
@@ -9,6 +9,7 @@ import { CategoryStoreService } from '../../../services/category-store.service';
 import { TransactionStoreService } from '../../../services/transaction-store.service';
 import { TransactionListComponent } from '../../shared/transaction-list/transaction-list.component';
 import { TransactionFilterComponent } from './transaction-filter/transaction-filter.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-manage-transaction',
@@ -16,7 +17,6 @@ import { TransactionFilterComponent } from './transaction-filter/transaction-fil
     CommonModule,
     TransactionListComponent,
     FilterTransactionPipe,
-    SlicePipe,
     SortTransactionPipe,
     TransactionFilterComponent,
   ],
