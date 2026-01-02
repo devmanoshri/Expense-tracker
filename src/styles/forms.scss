@@ -1,0 +1,62 @@
+button {
+  color: var(--color-black);
+  border: none;
+  border-radius: 8px;
+  line-height: 40px;
+  height: 40px;
+  padding: 0 16px;
+  transition: all 0.2s ease;
+  font-size: 1.125rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 0.5rem;
+  }
+}
+
+button.primary {
+  background-color: var(--color-vanilla);
+  &:hover {
+    background-color: var(--color-amber);
+  }
+}
+
+button.secondary {
+  background-color: transparent;
+  border: 1px solid var(--color-light-grey);
+  &:hover {
+    background-color: var(--color-light-grey);
+  }
+}
+
+button + button {
+  margin-left: 16px;
+}
+
+input:not([type="radio"]),
+select {
+  border: 1px solid var(--color-light-grey);
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  width: min(450px, 100%);
+}
+
+input:invalid,
+select:invalid {
+  background-color: var(--color-light-grey);
+}
+
+.inline-form-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-group {
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+}
