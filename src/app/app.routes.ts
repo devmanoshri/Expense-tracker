@@ -9,22 +9,6 @@ export const routes: Routes = [
     component: DashboardComponent,
   },
   {
-    path: 'transactions/:id',
-    loadComponent: () => {
-      return import('./components/shared/transaction-edit/transaction-edit.component').then(
-        (m) => m.TransactionEditComponent,
-      );
-    },
-  },
-  {
-    path: 'add-transactions',
-    loadComponent: () => {
-      return import('./components/shared/transaction-edit/transaction-edit.component').then(
-        (m) => m.TransactionEditComponent,
-      );
-    },
-  },
-  {
     path: 'dashboard',
     loadComponent: () => {
       return import('./components/pages/dashboard/dashboard.component').then(
