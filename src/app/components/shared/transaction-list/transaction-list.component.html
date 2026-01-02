@@ -1,58 +1,107 @@
 <div class="transaction-list-contaier">
-  <div class="list-header">
+  <div class="list-header flex-content">
     <h2>{{ sortTitle }}</h2>
     @if (showSorting) {
       <div class="list-sort-wrapper">
-        <label for="list-sort">Sort</label>
-        <select name="list-sort" id="list-sort" [formControl]="sortSelect">
-          <option [ngValue]="null">Select</option>
-          @for (item of selectSortObject; track $index) {
-            <option [ngValue]="item.value">{{ item.label }}</option>
-          }
-        </select>
+        <button class="primary" (click)="onAddOrEditClick()">
+          + Add new transaction
+        </button>
       </div>
     }
   </div>
-  <ul class="transaction-list">
-    <li
-      *ngFor="
-        let transaction of transactions ?? []
-          | sortTransaction: sortBy?.orderBy : sortBy?.sortOrder
-      "
-      [class.income]="transaction.type === 'income'"
-      [class.expense]="transaction.type === 'expense'"
-    >
-      <div class="info">
-        <div class="item-name bold-text">{{ transaction.title }}</div>
-        <div>
-          <span> ${{ transaction.amount }}</span>
-          <small
-            class="category-name-expense"
-            *ngIf="transaction.type === 'expense'"
-          >
-            {{ getCategoryName(transaction.categoryId) }}
-          </small>
-          <small
-            class="category-name-income"
-            *ngIf="transaction.type === 'income'"
-          >
-            {{ getCategoryName(transaction.categoryId) }}
-          </small>
-          <small>{{ transaction.date | date }}</small>
-        </div>
-      </div>
 
-      <div class="actions">
-        <button
-          [routerLink]="['/transactions', transaction.id]"
-          class="edit-btn"
+  <div class="flex-content">
+    <p>
+      Showing {{ visibleTransactionCount }} of
+      {{ totalTransactionCount }} transations
+    </p>
+    <div class="inline-form-group">
+      <select name="list-sort" aria-label="Sort by" [formControl]="sortSelect">
+        <option [ngValue]="null">Sort by</option>
+        @for (item of selectSortObject; track $index) {
+          <option [ngValue]="item.value">{{ item.label }}</option>
+        }
+      </select>
+    </div>
+  </div>
+  @let transactionList =
+    transactions | sortTransaction: sortBy?.orderBy : sortBy?.sortOrder;
+
+  <div cdkScrollable class="scroll-container">
+    <ul class="transaction-list">
+      @for (
+        transaction of transactionList | slice: 0 : visibleTransactionCount;
+        track $index
+      ) {
+        <li
+          class="border"
+          [class.income]="transaction.type === 'income'"
+          [class.expense]="transaction.type === 'expense'"
         >
-          Edit
-        </button>
-        <button (click)="onDelete(transaction.id!)" type="button">
-          Delete
-        </button>
-      </div>
-    </li>
-  </ul>
+          <div class="info d-flex gap-3 align-items-center">
+            <div class="item-name">{{ transaction.title }}</div>
+            <small class="text-secondary">{{ transaction.date | date }}</small>
+            <div>
+              <small
+                class="category"
+                [ngClass]="{
+                  'category-name-expense': transaction.type === 'expense',
+                  'category-name-income': transaction.type === 'income',
+                }"
+              >
+                {{ getCategoryName(transaction.categoryId) }}
+              </small>
+            </div>
+            <span> ${{ transaction.amount }}</span>
+          </div>
+
+          <div class="actions">
+            <button
+              class="primary"
+              (click)="onAddOrEditClick(transaction, true)"
+              title="Edit"
+            >
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button
+              class="secondary"
+              (click)="onDeleteClick(transaction.id!)"
+              type="button"
+              title="Delete"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+  <div class="pagination-wrapper">
+    <button class="primary" *ngIf="hasMore" (click)="showMore()">
+      Show more
+    </button>
+  </div>
 </div>
+
+@if (showModal) {
+  <app-modal
+    [header]="isEdit ? 'Edit transaction' : 'Add transaction'"
+    (modalClose)="onModalClose()"
+  >
+    <app-transaction-add-edit
+      [transaction]="selectedTransaction"
+      [isEdit]="isEdit"
+      (abort)="onModalClose()"
+    ></app-transaction-add-edit>
+  </app-modal>
+}
+
+@if (showConfirmationModal) {
+  <app-modal header="Please Confirm" (modalClose)="onDeleteCancel()">
+    <p>Are you sure you want to delete this transaction?</p>
+    <button class="primary" (click)="onDeleteConfirmation()">Yes</button>
+    <button class="secondary" (click)="onDeleteCancel()" type="button">
+      No
+    </button>
+  </app-modal>
+}

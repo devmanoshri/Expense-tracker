@@ -5,13 +5,30 @@
   box-shadow: 0 8px 12px -4px rgba(0, 0, 0, 0.15);
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     padding: 0.5rem;
   }
-  .list-header {
+
+  .flex-content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .list-header {
+    .list-sort-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .inline-form-group {
+        margin-bottom: 12px;
+      }
+    }
+  }
+  .scroll-container {
+    height: 550px;
+    overflow: auto;
   }
   .transaction-list {
     list-style: none;
@@ -19,14 +36,13 @@
 
     li {
       border-radius: var(--container-border-radius);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       padding: 1rem;
       margin-bottom: 0.7rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      @media (max-width: 768px) {
+      @media screen and (max-width: 768px) {
         flex-direction: column;
         gap: 0.5rem;
 
@@ -43,18 +59,19 @@
   }
 
   .income {
-    border-left: 5px solid var(--color-amber);
+    border-left: 5px solid var(--color-amber) !important;
   }
 
   .expense {
-    border-left: 5px solid var(--color-coral);
+    border-left: 5px solid var(--color-coral) !important;
   }
 
   .actions button {
+    cursor: pointer;
     margin-left: 0.5rem;
   }
 
-  small {
+  small.category {
     padding: 0.25rem 0.5rem;
     border-radius: 25px;
     margin-left: 0.5rem;
@@ -67,4 +84,13 @@
   .category-name-income {
     background-color: rgba(223, 228, 155, 0.5);
   }
+}
+
+app-modal p {
+  margin-bottom: 16px;
+}
+
+.pagination-wrapper {
+  margin: 30px 0 0;
+  text-align: center;
 }
