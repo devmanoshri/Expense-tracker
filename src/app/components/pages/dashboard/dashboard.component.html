@@ -3,7 +3,6 @@
   transactions
     | filterTransaction
       : { transactionType, selectedCategoryId, fromDate, toDate };
-@let categories = (categories$ | async) || [];
 
 <div class="transaction-wrapper">
   <div class="transaction-details">
