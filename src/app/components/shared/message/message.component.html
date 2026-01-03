@@ -1,0 +1,30 @@
+@if (message.text) {
+  <div class="message border border-{{ message.type }} text-{{ message.type }}">
+    <div class="d-flex gap-4 justify-content-between">
+      <div class="d-flex align-item-center gap-2">
+        @switch (message.type) {
+          @case ("info") {
+            <i class="bi bi-info-circle-fill"></i>
+          }
+          @case ("success") {
+            <i class="bi bi-check-circle-fill"></i>
+          }
+          @case ("danger") {
+            <i class="bi bi-exclamation-circle-fill"></i>
+          }
+          @case ("warning") {
+            <i class="bi bi-exclamation-triangle-fill"></i>
+          }
+        }
+        <p>{{ message.text }}</p>
+      </div>
+      <a
+        href="#"
+        class="link-{{ message.type }}"
+        (click)="$event.preventDefault(); clearMessage()"
+      >
+        <i class="bi bi-x-circle"></i>
+      </a>
+    </div>
+  </div>
+}
