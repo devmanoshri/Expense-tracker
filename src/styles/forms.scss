@@ -1,5 +1,5 @@
 button {
-  color: var(--color-black);
+  color: var(--et-black);
   border: none;
   border-radius: 8px;
   line-height: 40px;
@@ -14,17 +14,17 @@ button {
 }
 
 button.primary {
-  background-color: var(--color-vanilla);
+  background-color: var(--et-vanilla);
   &:hover {
-    background-color: var(--color-amber);
+    background-color: var(--et-amber);
   }
 }
 
 button.secondary {
   background-color: transparent;
-  border: 1px solid var(--color-light-grey);
+  border: 1px solid var(--et-light-grey);
   &:hover {
-    background-color: var(--color-light-grey);
+    background-color: var(--et-light-grey);
   }
 }
 
@@ -32,9 +32,13 @@ button + button {
   margin-left: 16px;
 }
 
+button:disabled{
+  background-color: var(--et-light-grey);
+}
+
 input:not([type="radio"]),
 select {
-  border: 1px solid var(--color-light-grey);
+  border: 1px solid var(--et-light-grey);
   height: 40px;
   padding: 0 16px;
   border-radius: 8px;
@@ -45,7 +49,7 @@ select {
 
 input:invalid,
 select:invalid {
-  background-color: var(--color-light-grey);
+  background-color: var(--et-light-grey);
 }
 
 .inline-form-group {
