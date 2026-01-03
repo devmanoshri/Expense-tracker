@@ -3,20 +3,20 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
 
 :root {
-  --color-bg: #f5f7fa;
-  --color-text: #1f2937;
-  --color-muted: #6b7280;
-  --color-light-grey: #e3e3e3;
+  --et-bg: #f5f7fa;
+  --et-text: #1f2937;
+  --et-muted: #6b7280;
+  --et-light-grey: #e3e3e3;
 
-  --color-white: #ffffff;
-  --color-black: #000000;
-  --color-grey: #212738;
-  --color-brunt-rose: #8d4c50;
-  --color-coral: #f97068;
-  --color-lemon: #d1d646;
-  --color-amber: #d8dd71;
-  --color-vanilla: #dfe49b;
-  --color-aqua: #57c4e5;
+  --et-white: #ffffff;
+  --et-black: #000000;
+  --et-grey: #212738;
+  --et-brunt-rose: #8d4c50;
+  --et-coral: #f97068;
+  --et-lemon: #d1d646;
+  --et-amber: #d8dd71;
+  --et-vanilla: #dfe49b;
+  --et-aqua: #57c4e5;
 
   --container-border-radius: 12px;
 }
@@ -40,7 +40,7 @@ body {
   font-family: "Inter", sans-serif;
   font-size: 18px;
   line-height: 1.5;
-  background-color: var(--color-light-grey);
+  background-color: var(--et-light-grey);
 }
 
 h1,
