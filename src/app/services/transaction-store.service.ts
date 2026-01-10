@@ -1,12 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  catchError,
-  delay,
-  Observable,
-  of,
-  take
-} from 'rxjs';
+import { BehaviorSubject, catchError, delay, Observable, of, take } from 'rxjs';
 import { Transaction } from '../models/transaction.model';
 import { TransactionService } from './transaction.service';
 
@@ -21,7 +14,10 @@ export class TransactionStoreService {
   private readonly transationService = inject(TransactionService);
 
   initTransaction(force = false): void {
-    if (this._transactions$.getValue().length && !force) {
+    if (
+      (this._transactions$.getValue().length && !force) ||
+      this._transactionIsLoading$.getValue()
+    ) {
       return;
     }
 

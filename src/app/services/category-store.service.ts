@@ -8,14 +8,20 @@ import { CategoriesService } from './categories.service';
 })
 export class CategoryStoreService {
   private _categories$ = new BehaviorSubject<Category[]>([]);
-  private _categoryHasError$ = new BehaviorSubject(false);
+  private _categoryHasError$ = new BehaviorSubject<boolean>(false);
+  private _categoryIsLoading$ = new BehaviorSubject<boolean>(false);
 
   private readonly categoryServices = inject(CategoriesService);
 
   initCategory(force = false): void {
-    if (this._categories$.getValue().length && !force) {
+    if (
+      (this._categories$.getValue().length && !force) ||
+      this._categoryIsLoading$.getValue()
+    ) {
       return;
     }
+
+    this._categoryIsLoading$.next(true);
 
     this.categoryServices
       .getCategories()
@@ -26,7 +32,10 @@ export class CategoryStoreService {
           return of([]);
         }),
       )
-      .subscribe((categoryData) => this._categories$.next(categoryData));
+      .subscribe((categoryData) => {
+        this._categoryIsLoading$.next(false);
+        this._categories$.next(categoryData);
+      });
   }
 
   getCategoryNameById(id?: string): string {
