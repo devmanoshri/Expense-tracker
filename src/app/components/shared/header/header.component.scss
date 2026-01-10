@@ -2,8 +2,10 @@ header {
   background-color: var(--et-lemon);
   display: flex;
   justify-content: space-between;
+  align-items: center;
   text-align: center;
   padding: 1rem 4rem;
+  cursor: pointer;
 
   .menu-container {
     ul {
@@ -13,7 +15,7 @@ header {
 
       li {
         position: relative;
-        font-size: 24px;
+        font-size: 18px;
         cursor: pointer;
 
         @media screen and (max-width: 768px) {
@@ -39,6 +41,9 @@ header {
 
         &:hover::after {
           transform: scaleX(1);
+        }
+        &.active {
+          color: var(--et-brunt-rose);
         }
       }
     }
