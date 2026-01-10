@@ -48,6 +48,6 @@ export class DashboardComponent {
   }
 
   onTransactionsChange(transactions: Transaction[]) {
-    this.transactionsChangeFromChart = transactions;
+    setTimeout(() => (this.transactionsChangeFromChart = transactions), 100);
   }
 }
