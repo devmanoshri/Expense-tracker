@@ -1,16 +1,16 @@
 <div class="summary">
   <div class="card bold-text income">
     <h4>Income</h4>
-    <p>${{ totalIncome }}</p>
+    <p>{{ totalIncome | currency:'NOK':'symbol'}}</p>
   </div>
 
   <div class="card bold-text expense">
     <h4>Expense</h4>
-    <p>${{ totalExpense }}</p>
+    <p>{{ totalExpense | currency:'NOK':'symbol'}}</p>
   </div>
 
   <div class="card bold-text balance">
     <h4>Balance</h4>
-    <p>${{ balance ? balance : 0 }}</p>
+    <p>{{ (balance ? balance : 0) | currency:'NOK':'symbol'}}</p>
   </div>
 </div>

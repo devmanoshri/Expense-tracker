@@ -229,7 +229,6 @@ export class TransactionListComponent
     if (this.transactions.length < this.visibleTransactionCount + 10) {
       this.visibleTransactionCount = this.transactions.length;
     }
-    console.log(this.visibleTransactionCount);
   }
 
   get hasMore() {

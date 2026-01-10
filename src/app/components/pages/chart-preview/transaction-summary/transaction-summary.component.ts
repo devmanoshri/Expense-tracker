@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Transaction } from '../../../../models/transaction.model';
 
 @Component({
   selector: 'app-transaction-summary',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CurrencyPipe],
   templateUrl: './transaction-summary.component.html',
   styleUrls: ['./transaction-summary.component.scss'],
 })

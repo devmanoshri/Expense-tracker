@@ -70,7 +70,7 @@
                 {{ getCategoryName(transaction.categoryId) }}
               </small>
             </div>
-            <span> ${{ transaction.amount }}</span>
+            <span> {{ transaction.amount | currency:'NOK':'symbol'}}</span>
           </div>
 
           <div class="actions">
