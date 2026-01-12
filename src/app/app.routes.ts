@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
-import { transactionAccessGuard } from './components/pages/manage-transaction/transaction-access.guard';
-import { transactionsResolver } from './components/pages/manage-transaction/transactions.resolver';
+import { transactionAccessGuard } from './guards/transaction-access.guard';
+import { transactionsResolver } from './resolvers/transactions.resolver';
 
 export const routes: Routes = [
   {
