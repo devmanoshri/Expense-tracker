@@ -10,6 +10,7 @@ import { TransactionStoreService } from '../../../services/transaction-store.ser
 import { TransactionChartComponent } from '../../shared/transaction-chart/transaction-chart.component';
 import { TransactionListComponent } from '../../shared/transaction-list/transaction-list.component';
 import { TransactionSummaryComponent } from '../chart-preview/transaction-summary/transaction-summary.component';
+import { AuthStatusComponent } from "./auth-status/auth-status.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,8 @@ import { TransactionSummaryComponent } from '../chart-preview/transaction-summar
     FilterTransactionPipe,
     SlicePipe,
     SortTransactionPipe,
-  ],
+    AuthStatusComponent
+],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

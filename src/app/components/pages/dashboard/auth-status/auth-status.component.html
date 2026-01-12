@@ -1,0 +1,15 @@
+<div class="auth-status-container mb-4">
+  <form>
+    <label for="authStatus">Authorization Status: </label>
+    @for (option of choiceOptions; track $index) {
+      <label>
+        <input
+          type="radio"
+          name="choice"
+          [formControl]="choice"
+          [value]="option"
+        />{{ option | titlecase}}
+      </label>
+    }
+  </form>
+</div>

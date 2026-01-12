@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { transactionAccessGuard } from './components/pages/manage-transaction/transaction-access.guard';
 import { transactionsResolver } from './components/pages/manage-transaction/transactions.resolver';
-import { ManageTransactionComponent } from './components/pages/manage-transaction/manage-transaction.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +23,7 @@ export const routes: Routes = [
     resolve: {
       transactions: transactionsResolver,
     },
+    canActivate:[transactionAccessGuard],
     loadComponent: () => {
       return import('./components/pages/manage-transaction/manage-transaction.component').then(
         (m) => m.ManageTransactionComponent,
