@@ -54,6 +54,7 @@ export class TransactionAddEditComponent implements OnInit, OnDestroy {
 
   isSaveLoading = false;
   hasSaveError = false;
+  isSubmitted = false;
 
   transactionForm = this.formBuilder.nonNullable.group({
     transactionType: ['income' as TransactionType, Validators.required],
@@ -88,6 +89,7 @@ export class TransactionAddEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    this.isSubmitted = true;
     if (this.isSaveLoading) {
       return;
     }
@@ -96,6 +98,8 @@ export class TransactionAddEditComponent implements OnInit, OnDestroy {
       return;
     }
     const formValue = this.transactionForm.value;
+    
+    console.log(this.isSubmitted);
     const data = Object.assign(this.transaction, {
       type: formValue.transactionType,
       title: formValue.title,

@@ -1,62 +1,87 @@
 <div class="edit-container">
   <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
-    <div class="radio-group mb-3">
+    <div class="mb-3">
       <label>Transaction type</label>
-      <div class="inline-form-group">
-        <input type="radio" value="income" formControlName="transactionType" />
-        <label> Income </label>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="income"
+          formControlName="transactionType"
+          id="radio-income"
+        />
+        <label class="form-check-label" for="radio-income"> Income </label>
       </div>
-      <div class="inline-form-group">
-        <input type="radio" value="expense" formControlName="transactionType" />
-        <label> Expense </label>
+
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="expense"
+          formControlName="transactionType"
+          id="radio-expense"
+        />
+        <label class="form-check-label" for="radio-expense"> Expense </label>
       </div>
     </div>
 
-    <div class="form-group mb-3">
-      <label for="trTitle">Title</label>
+    <div class="mb-3">
+      <label class="form-control-label" for="trTitle">Title</label>
       <input
+        class="form-control"
         type="text"
         id="trTitle"
         formControlName="title"
         placeholder="Title"
+        aria-label="input title"
       />
       @if (
-        transactionForm.controls.title.touched &&
-        transactionForm.controls.title.invalid
+        transactionForm.get("title")?.touched &&
+        transactionForm.get("title")?.invalid &&
+        isSubmitted
       ) {
         <div class="text-danger">
-          @if (transactionForm.controls.title.errors?.["required"]) {
-            <span> Title is required </span>
+          @if (transactionForm.get("title")?.errors?.["required"]) {
+            <small>Title is required </small>
           }
         </div>
       }
     </div>
-    <div class="form-group mb-3">
-      <label for="trAmount">Amount</label>
-      <input
-        type="number"
-        id="trAmount"
-        formControlName="amount"
-        placeholder="Amount"
-      /> kr
+    <div class="mb-3">
+      <label class="form-control-label" for="trAmount">Amount</label>
+      <div class="input-group">
+        <input
+          type="number"
+          id="trAmount"
+          formControlName="amount"
+          class="form-control"
+          placeholder="Amount"
+        />
+        <span class="input-group-text">kr</span>
+      </div>
       @if (
-        transactionForm.controls.amount.touched &&
-        transactionForm.controls.amount.invalid
+        transactionForm.get("amount")?.touched &&
+        transactionForm.get("amount")?.invalid
       ) {
         <div class="text-danger">
-          @if (transactionForm.controls.amount.errors?.["required"]) {
-            <span> Amount is required </span>
+          @if (transactionForm.get("amount")?.errors?.["required"]) {
+            <small>Amount is required </small>
           }
-          @if (transactionForm.controls.amount.errors?.["min"]) {
-            <span *ngIf=""> Amount must be greater than 0 </span>
+          @if (transactionForm.get("amount")?.errors?.["min"]) {
+            <small> Amount must be greater than 0 </small>
           }
         </div>
       }
     </div>
 
     <div class="form-group mb-3">
-      <label for="trCategoryId">Category</label>
-      <select id="trCategoryId" formControlName="categoryId">
+      <label for="trCategoryId" class="form-select-label mb-1">Category</label>
+      <select
+        id="trCategoryId"
+        formControlName="categoryId"
+        class="form-select"
+        aria-label="Default select example"
+      >
         <option value="">Select</option>
         @for (
           category of categories$
@@ -71,40 +96,43 @@
         }
       </select>
       @if (
-        transactionForm.controls.categoryId.touched &&
-        transactionForm.controls.categoryId.invalid
+        transactionForm.get("categoryId")?.touched &&
+        transactionForm.get("categoryId")?.invalid
       ) {
         <div class="text-danger">
-          @if (transactionForm.controls.categoryId.errors?.["required"]) {
-            <span> Category is required </span>
+          @if (transactionForm.get("categoryId")?.errors?.["required"]) {
+            <small> Category is required </small>
           }
         </div>
       }
     </div>
 
     <div class="form-group mb-3">
-      <label for="trTransactionDate">Transaction date</label>
+      <label class="form-control-label" for="trTransactionDate"
+        >Transaction date</label
+      >
       <input
+        class="form-control"
         type="date"
         id="trTransactionDate"
         formControlName="transactionDate"
       />
       @if (
-        transactionForm.controls.transactionDate.touched &&
-        transactionForm.controls.transactionDate.invalid
+        transactionForm.get("transactionDate")?.touched &&
+        transactionForm.get("transactionDate")?.invalid
       ) {
         <div class="text-danger">
-          @if (transactionForm.controls.title.errors?.["required"]) {
-            <span> Transaction date is required </span>
+          @if (transactionForm.get("transactionDate")?.errors?.["required"]) {
+            <small> Transaction date is required </small>
           }
         </div>
       }
     </div>
 
-    <button type="submit" class="primary" [disabled]="isSaveLoading">
+    <button type="submit" class="btn btn-primary" [disabled]="isSaveLoading">
       {{ isEdit ? "Update" : "Add" }}
     </button>
-    <button type="button" class="secondary" (click)="abort.emit()">
+    <button type="button" class="btn btn-light ms-2" (click)="abort.emit()">
       Cancel
     </button>
   </form>
