@@ -1,8 +1,8 @@
 <div class="auth-status-container mb-4">
-  <label class="fs-4">Select status: </label>
+  <label class="fs-4">Gaurd demo: </label>
   <form>
     @for (option of choiceOptions; track $index) {
-      <div class="form-check">
+      <div class="form-check-inline">
         <input
           class="form-check-input"
           [formControl]="choice"
@@ -12,7 +12,7 @@
           id="{{ $index }}"
         />
         <label class="form-check-label" for="{{ $index }}">
-          {{ option | titlecase }}
+          {{ option.name| titlecase }} <i class="bi bi-{{ option.icon}}"></i>
         </label>
       </div>
     }
